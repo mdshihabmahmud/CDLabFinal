@@ -1,0 +1,95 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+char arr[3];
+
+void isCorrect(char *str)
+{
+
+
+	int semicolon = 0, bracket1 = 0, bracket2 = 0, flag = 0;
+
+	int i;
+	for (i = 0; i < 3; i++)
+		arr[i] = str[i];
+
+
+	if(strcmp(arr, "for") != 0)
+	{
+		printf("Error in for keyword usage");
+		return;
+	}
+
+
+	while(i != strlen(str))
+	{
+		char ch = str[i++];
+		if(ch == '(')
+		{
+
+			bracket1 ++;
+		}
+		else if(ch == ')')
+		{
+
+			bracket2 ++;
+
+		}
+		else if(ch == ';')
+		{
+
+			semicolon ++;
+		}
+		else continue;
+
+	}
+
+
+	if(semicolon != 2)
+	{
+		printf("\nSemicolon Error\n");
+		flag++;
+	}
+
+
+	else if(str[strlen(str) - 1] != ')')
+	{
+		printf("\nClosing parenthesis absent at end\n");
+		flag++;
+	}
+
+
+	else if(str[3] == ' ' && str[4] != '(' )
+	{
+		printf("\nOpening parenthesis absent after for keyword\n");
+		flag++;
+	}
+
+	else if(bracket1 != 1 || bracket2 != 1 || bracket1 != bracket2)
+	{
+		printf("\nParentheses Count Error\n");
+		flag++;
+	}
+
+	if(flag == 0)
+		printf("\nLogically correct\n");
+
+}
+
+int main(void) {
+
+
+
+	char str1[100];
+    printf("Enter a for loop statement:\n");
+    gets(str1);
+	isCorrect(str1);
+
+	char str2[100];
+    printf("Enter a for loop statement:\n");
+    gets(str2);
+	isCorrect(str2);
+
+	return 0;
+}
